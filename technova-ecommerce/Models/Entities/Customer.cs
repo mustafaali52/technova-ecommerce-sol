@@ -12,12 +12,15 @@ namespace technova_ecommerce.Models.Entities
         public int CustomerId { get; set; }
 
         [Column("first_name")]
+        [Display(Name = "Name")]
         public string FirstName { get; set; }
 
         [Column("last_name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Column("email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Column("password")]
