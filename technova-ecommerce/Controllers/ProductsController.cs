@@ -48,7 +48,7 @@ namespace technova_ecommerce.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            //ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             return View();
         }
 
