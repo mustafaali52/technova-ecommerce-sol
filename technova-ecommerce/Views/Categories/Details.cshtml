@@ -1,0 +1,69 @@
+﻿@model technova_ecommerce.Models.Entities.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DisplayOrder)
+        </dd>
+    </dl>
+</div>
+
+<div class="mt-4">
+    <h4>Products in this Category</h4>
+    <hr />
+    @if (Model.Products != null && Model.Products.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Stock Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.ProductName</td>
+                        <td>@product.Description</td>
+                        <td>@product.StockPrice</td>
+                        <td>@product.Quantity</td>
+                        <td>
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">Details</a> |
+                            <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No products in this category yet.</p>
+    }
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CategoryId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

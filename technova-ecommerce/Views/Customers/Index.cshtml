@@ -11,7 +11,7 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class = "table-secondary">
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="table-secondary">
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -49,9 +49,17 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                    <ul class="nav nav-underline">
+                        <li class="nav-item">
+                            <a class="badge bg-primary" asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="badge bg-primary" asp-action="Details" asp-route-id="@item.CustomerId">Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="badge bg-primary" asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                        </li>
+                </ul>
             </td>
         </tr>
 }
