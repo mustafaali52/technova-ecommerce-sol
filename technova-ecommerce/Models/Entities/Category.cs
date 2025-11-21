@@ -17,6 +17,6 @@ namespace technova_ecommerce.Models.Entities
         public int DisplayOrder { get; set; }
         
         // Navigation Property - One Category has Many Products
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product>? Products { get; set; }
     }
 }
