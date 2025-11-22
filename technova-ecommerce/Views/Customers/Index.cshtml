@@ -11,7 +11,7 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-light">
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -35,7 +35,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="table-primary">
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
