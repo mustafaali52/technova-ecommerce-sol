@@ -25,6 +25,6 @@ namespace technova_ecommerce.Models.Entities
         
         // Navigation Property
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }

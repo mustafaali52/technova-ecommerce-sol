@@ -19,6 +19,12 @@ namespace technova_ecommerce.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> AllItems()
+        {
+            var categories = await _context.Categories.Include(c => c.Products).ToListAsync();
+            return View(categories);
+        }
+
         // GET: Categories
         public async Task<IActionResult> Index()
         {

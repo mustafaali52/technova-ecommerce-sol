@@ -62,7 +62,7 @@ namespace technova_ecommerce.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("technova_ecommerce.Models.Entities.Category", b =>
@@ -85,7 +85,7 @@ namespace technova_ecommerce.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("technova_ecommerce.Models.Entities.Product", b =>
@@ -123,7 +123,7 @@ namespace technova_ecommerce.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("technova_ecommerce.Models.Entities.Product", b =>
