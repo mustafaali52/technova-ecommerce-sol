@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "View";
+    var isFirst = true;
 }
 
 <h1>View All Items</h1>
@@ -10,22 +11,24 @@
 <div class="accordion" id="accordionExample">
     @foreach (var item in Model)
     {
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@item.CategoryName" aria-expanded="true" aria-controls="collapseOne">
+     <div class="accordion-item">
+            <h2 class="accordion-header" id="@($"heading{item.CategoryId}")">
+
+                <button class="accordion-button @(isFirst ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="@($"#collapse{item.CategoryId}")" aria-expanded=" @(isFirst ? "true" : "false")" aria-controls="@($"collapse{item.CategoryId}")">
                     @item.CategoryName
                 </button>
-            </h2>
-            <div id="#@item.CategoryName" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        </h2>
+            <div id="@($"collapse{item.CategoryId}")" class="accordion-collapse collapse @(isFirst ? "show" : "")" aria-labelledby="@($"heading{item.CategoryId}")" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul>
-                        @foreach(var product in item.Products)
-                        {
-                            <li>@product.ProductName</li>
-                        }
+                            @foreach (var product in item.Products)
+                            {
+                                <li>@product.ProductName</li>
+                            }
                     </ul>
                 </div>
             </div>
-        </div>
+    </div>
+     isFirst = false;
     } 
 </div>
