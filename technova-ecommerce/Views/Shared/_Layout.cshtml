@@ -19,26 +19,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-action="Create" asp-controller="Customers">Add New</a>
                                 <a class="dropdown-item" asp-action="Index" asp-controller="Customers">View All</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add New</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Products">View All</a>
                             </div>
                         </li>
                     </ul>
