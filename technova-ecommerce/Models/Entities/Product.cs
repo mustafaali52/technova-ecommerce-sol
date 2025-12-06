@@ -18,5 +18,10 @@ namespace technova_ecommerce.Models.Entities
         public decimal StockPrice { get; set; }
         [Column("quantity")]
         public int Quantity { get; set; }
+
+        [Column("category_id")]
+        public int CategoryId { get; set; }
+
+        public Category? Category { get; set; }
     }
 }

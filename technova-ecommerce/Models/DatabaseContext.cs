@@ -11,7 +11,7 @@ namespace technova_ecommerce.Models
         }
 
         public DbSet<Customer> Customers { get; set; }
-
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
