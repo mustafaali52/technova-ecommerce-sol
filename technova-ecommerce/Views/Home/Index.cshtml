@@ -1,8 +1,39 @@
-﻿@{
+﻿@model IEnumerable<technova_ecommerce.Models.Entities.Category>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="accordion" id="accordionExample">
+    @{
+        int count = 1;
+    }
+        
+    @foreach (var item in Model)
+    {
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="@string.Format("categoryHeading{0}", item.CategoryId)">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="@string.Format("#category{0}", item.CategoryId)" aria-expanded="true" aria-controls="@string.Format("category{0}", item.CategoryId)">
+                        @item.CategoryName
+                    </button>
+                </h2>
+                <div id="@string.Format("category{0}", item.CategoryId)" class="accordion-collapse collapse @(count == 1 ? "show" : "")" aria-labelledby="@string.Format("categoryHeading{0}", item.CategoryId)" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body">
+                        <ul>
+                            @foreach (var product in item.Products)
+                            {
+                                <li>
+                                    @product.ProductName
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            count++;
+    } 
+    </div>
 </div>

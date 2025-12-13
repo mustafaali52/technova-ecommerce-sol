@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using technova_ecommerce.Models;
 
 namespace technova_ecommerce.Controllers
@@ -7,15 +8,20 @@ namespace technova_ecommerce.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var categories = _context.Categories
+                .Include(p=>p.Products)
+                .ToList();
+            return View(categories);
         }
 
         public IActionResult Privacy()
