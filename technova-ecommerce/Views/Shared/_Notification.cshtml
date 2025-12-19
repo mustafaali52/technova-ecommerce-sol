@@ -1,0 +1,31 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+
+@if(TempData["SuccessMessage"] != null)
+    {
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Success!</strong> @TempData["SuccessMessage"]
+    </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.success('@TempData["SuccessMessage"]');
+            });
+        </script>
+    }
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4 class="alert-heading">Error!</h4>
+        <p class="mb-0">@TempData["error"]</p>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr.error('@TempData["error"]');
+        });
+    </script>
+
+}

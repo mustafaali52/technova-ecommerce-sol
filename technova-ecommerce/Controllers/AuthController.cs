@@ -15,8 +15,12 @@ namespace technova_ecommerce.Controllers
         {
             _db = db;
         }
-        public IActionResult Login()
+        public IActionResult Login(string? expired)
         {
+            if (!string.IsNullOrEmpty(expired) && expired == "true")
+            {
+                ViewBag.ErroMessage = "Your session has expired. Please login again.";
+            }
             return View();
         }
 
@@ -78,6 +82,12 @@ namespace technova_ecommerce.Controllers
             }
 
             return View(user);
+        }
+
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt_token");
+            return RedirectToAction("Login", "Auth");
         }
 
 

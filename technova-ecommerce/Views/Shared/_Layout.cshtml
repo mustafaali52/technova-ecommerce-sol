@@ -25,21 +25,27 @@
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Customers">View All</a>
-                                <a class="dropdown-item" asp-action="Create" asp-controller="Customers">Create</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Index"  asp-controller="Categories">View Categories</a>
-                                <a class="dropdown-item" asp-action="Create" asp-controller="Categories">Create</a>
-                                <a class="dropdown-item" asp-action="AllItems" asp-controller="Categories">View All</a>
-                            </div>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Customers">View All</a>
+                                        <a class="dropdown-item" asp-action="Create" asp-controller="Customers">Create</a>
+                                    </div>
+                                </li>
+                            }
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Categories">View Categories</a>
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Categories">Create</a>
+                                    <a class="dropdown-item" asp-action="AllItems" asp-controller="Categories">View All</a>
+                                </div>
+                            </li>
+                        }
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu">
@@ -53,12 +59,21 @@
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <ul>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller = "Auth" asp-action="Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

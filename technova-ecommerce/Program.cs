@@ -24,6 +24,24 @@ builder.Services.AddAuthentication("Bearer")
                     context.Token = token;
                 }
                 return Task.CompletedTask;
+            },
+            OnAuthenticationFailed = context =>
+            {
+                if (context.Exception.GetType() == typeof(Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException))
+                {
+                    context.Response.Cookies.Delete("jwt_token");
+                    context.Response.Redirect("/Auth/Login?expired=true");
+                }
+                return Task.CompletedTask;
+            },
+            OnChallenge = context =>
+            {
+                context.HandleResponse();
+                if (!context.Response.HasStarted)
+                {
+                    context.Response.Redirect("/Auth/Login");
+                }
+                return Task.CompletedTask;
             }
         };
 
@@ -33,6 +51,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero, // Remove default 5 minute grace period
             // Normally, the signing key would be retrieved from a secure location
             IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
                 System.Text.Encoding.UTF32.GetBytes("class-work-5E"))
