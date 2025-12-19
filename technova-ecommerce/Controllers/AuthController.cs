@@ -81,6 +81,12 @@ namespace technova_ecommerce.Controllers
         }
 
 
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt_token");
+            return RedirectToAction("Login", "Auth");
+        }
+
         private string GenerateToken(User user) {
             var claims = new[] {
                 new Claim(ClaimTypes.Name, user.UserName),
