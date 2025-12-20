@@ -17,7 +17,7 @@ namespace technova_ecommerce.Models.Entities
         }
 
         [Column("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         [Column("hashed_password")]
         public string HashedPassword { get; set; }
