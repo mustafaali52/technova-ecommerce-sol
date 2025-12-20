@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using technova_ecommerce.Models;
 using technova_ecommerce.Models.Entities;
 
 namespace technova_ecommerce.Controllers
 {
+    [Authorize("Admin, Vendor")]
     public class CustomersController : Controller
     {
         private readonly DatabaseContext _context;
@@ -43,12 +45,14 @@ namespace technova_ecommerce.Controllers
             return View(customer);
         }
 
+        [Authorize("Admin")]
         // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize("Admin")]
         // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

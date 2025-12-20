@@ -19,34 +19,48 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Create" asp-controller="Customers">Add New</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Customers">View All</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add New</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Products">View All</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Create" asp-controller="Categories">Add New</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Categories">View All</a>
-                            </div>
-                        </li>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-action="Create" asp-controller="Customers">Add New</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Customers">View All</a>
+                                    </div>
+                                </li>
+                            }
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add New</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Products">View All</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Categories">Add New</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Categories">View All</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-sm-2" type="search" placeholder="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    <span class="badge bg-info"><a asp-action="Login" asp-controller="Auth">Login</a></span>
-                    <span class="badge bg-light"><a asp-action="Register" asp-controller="Auth">Register</a></span>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <span class="badge bg-info"><a asp-action="Login" asp-controller="Auth">Login</a></span>
+                        <span class="badge bg-light"><a asp-action="Register" asp-controller="Auth">Register</a></span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-info"><a asp-action="Logout" asp-controller="Auth">Logout</a></span>
+                    }
+
                 </div>
             </div>
         </nav>
