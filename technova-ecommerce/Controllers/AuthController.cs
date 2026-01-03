@@ -60,7 +60,11 @@ namespace technova_ecommerce.Controllers
                 }
             }
         }
-
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt_token");
+            return RedirectToAction("Login");
+        }
 
         private string GenerateJwtToken(User user)
         {
@@ -75,8 +79,8 @@ namespace technova_ecommerce.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
-                issuer: "yourdomain.com",
-                audience: "yourdomain.com",
+                issuer: "https://localhost:7185/",
+                audience: "https://localhost:7185/",
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
